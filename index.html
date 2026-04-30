@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Ultimate Key Admin | Glassmorphism Pro</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+  --bg1: #0a0f1f;
+  --bg2: #11172b;
+  --glass: rgba(25, 35, 60, 0.65);
+  --glass-hover: rgba(25, 45, 75, 0.8);
+  --line: rgba(255, 255, 255, 0.1);
+  --text: #ffffff;
+  --muted: #9aaec5;
+  --accent: #00ffcc;
+  --accent-dark: #00ccaa;
+  --danger: #ff5570;
+  --warn: #ffb020;
+  --success: #2ed573;
+  --info: #5dade2;
+  --purple: #a855f7;
+  --pink: #ec4899;
+  --card-radius: 28px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.light {
+  --bg1: #eef3fa;
+  --bg2: #dfe7f6;
+  --glass: rgba(255, 255, 255, 0.75);
+  --glass-hover: rgba(255, 255, 255, 0.9);
+  --line: rgba(0, 0, 0, 0.08);
+  --text: #111827;
+  --muted: #6b7280;
+}
+
+body {
+  background: linear-gradient(145deg, var(--bg1), var(--bg2));
+  color: var(--text);
+  min-height: 100vh;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 10px; }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
+
+.wrap {
+  max-width: 1450px;
+  margin: auto;
+  padding: 20px;
+  padding-bottom: 100px;
+}
+
+.glass {
+  background: var(--glass);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--line);
+  border-radius: var(--card-radius);
+  transition: var(--transition);
+}
+
+.glass:hover {
+  background: var(--glass-hover);
+  border-color: var(--accent);
+}
+
+.top {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.logo {
+  padding: 20px 24px;
+  flex: 1;
+}
+
+.logo h1 {
+  font-size: 28px;
+  background: linear-gradient(135deg, var(--accent), var(--purple), var(--pink));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  background-size: 200% auto;
+  animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.logo p {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+.btn, .btn2, .btn-danger, .btn-success {
+  border: none;
+  padding: 12px 24px;
+  border-radius: 18px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: var(--transition);
+}
+
+.btn {
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+  color: #0a0f1f;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 255, 204, 0.3);
+}
+
+.btn2 {
+  background: var(--glass);
+  color: var(--text);
+  border: 1px solid var(--line);
+}
+
+.btn2:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn-danger {
+  background: rgba(255, 85, 112, 0.2);
+  color: var(--danger);
+  border: 1px solid var(--danger);
+}
+
+.btn-danger:hover {
+  background: var(--danger);
+  color: white;
+}
+
+.btn-success {
+  background: rgba(46, 213, 115, 0.2);
+  color: var(--success);
+  border: 1px solid var(--success);
+}
+
+.btn-success:hover {
+  background: var(--success);
+  color: white;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.card {
+  padding: 22px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.num {
+  font-size: 42px;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--accent), #00ffaa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-top: 8px;
+}
+
+.small {
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.page { display: none; animation: fadeUp 0.4s ease; }
+.page.active { display: block; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 5px;
+}
+
+.row-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: rgba(0, 0, 0, 0.3);
+  color: var(--text);
+  font-size: 14px;
+  transition: var(--transition);
+  outline: none;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(0, 255, 204, 0.15);
+}
+
+textarea {
+  min-height: 85px;
+  resize: vertical;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  margin-top: 15px;
+  border-radius: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  text-align: left;
+  padding: 16px 12px;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 600;
+  border-bottom: 1px solid var(--line);
+}
+
+td {
+  padding: 14px 12px;
+  font-size: 13px;
+  border-bottom: 1px solid var(--line);
+}
+
+tr {
+  transition: var(--transition);
+}
+
+tr:hover {
+  background: rgba(0, 255, 204, 0.06);
+}
+
+.badge {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 30px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.green { background: rgba(46, 213, 115, 0.2); color: #2ed573; border: 1px solid #2ed573; }
+.red { background: rgba(255, 71, 87, 0.2); color: #ff4757; border: 1px solid #ff4757; }
+.yellow { background: rgba(255, 165, 2, 0.2); color: #ffa502; border: 1px solid #ffa502; }
+.blue { background: rgba(93, 173, 226, 0.2); color: #5dade2; border: 1px solid #5dade2; }
+.purple { background: rgba(168, 85, 247, 0.2); color: #a855f7; border: 1px solid #a855f7; }
+
+.filter-bar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.filter-bar select, .filter-bar input {
+  flex: 1;
+  min-width: 140px;
+}
+
+.action-group {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.icon-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  border-radius: 12px;
+  padding: 6px 14px;
+  cursor: pointer;
+  color: var(--muted);
+  font-size: 11px;
+  transition: var(--transition);
+}
+
+.icon-btn:hover {
+  background: var(--accent);
+  color: #0a0f1f;
+}
+
+.nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 80px;
+  padding: 12px 20px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  background: rgba(8, 12, 24, 0.92);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid var(--line);
+}
+
+.nav button {
+  border: none;
+  border-radius: 20px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.nav button.active {
+  background: var(--glass);
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(12px);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal-content {
+  max-width: 550px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 100px;
+  transform: translateX(-50%);
+  padding: 14px 28px;
+  border-radius: 50px;
+  background: var(--glass);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-size: 14px;
+  display: none;
+  z-index: 1100;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--muted);
+}
+
+.empty-icon {
+  font-size: 55px;
+  margin-bottom: 15px;
+}
+
+.color-preview {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: 2px solid var(--line);
+  cursor: pointer;
+}
+
+/* Settings Panel */
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.setting-label {
+  font-weight: 500;
+}
+
+.color-options {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.color-option {
+  width: 45px;
+  height: 45px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: var(--transition);
+  border: 2px solid transparent;
+}
+
+.color-option:hover {
+  transform: scale(1.05);
+}
+
+.color-option.selected {
+  border-color: var(--text);
+  transform: scale(1.1);
+}
+
+@media (max-width: 700px) {
+  .wrap { padding: 16px; }
+  .row, .row-3 { grid-template-columns: 1fr; }
+  .num { font-size: 32px; }
+  .logo h1 { font-size: 22px; }
+  .nav button { font-size: 10px; }
+  .nav { padding: 10px; gap: 5px; }
+  td { font-size: 11px; padding: 10px 6px; }
+  .filter-bar { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN SCREEN START -->
+<div id="loginPage" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0f1f;display:flex;justify-content:center;align-items:center;z-index:9999;">
+  <div class="glass card" style="width:300px;text-align:center;">
+    <h2>🔐 Admin Login</h2>
+    <input id="email" placeholder="Email"><br><br>
+    <input id="password" type="password" placeholder="Password"><br><br>
+    <button class="btn" onclick="login()">Login</button>
+  </div>
+</div>
+<!-- LOGIN SCREEN END -->
+
+<div class="wrap">
+
+<div class="top">
+  <div class="glass logo">
+    <h1>✨ ULTIMATE KEY ADMIN</h1>
+    <p>Real-time Glass Management | Premium Control Panel</p>
+  </div>
+  <button class="btn2" onclick="toggleTheme()">🌓 Dark / Light</button>
+  <button class="btn-danger" onclick="logout()">🚪 Logout</button>
+</div>
+
+<!-- Dashboard -->
+<div id="dash" class="page active">
+  <div class="grid">
+    <div class="glass card"><div class="small">📊 TOTAL KEYS</div><div id="s1" class="num">0</div></div>
+    <div class="glass card"><div class="small">🟢 ACTIVE</div><div id="s2" class="num">0</div></div>
+    <div class="glass card"><div class="small">⏰ EXPIRED</div><div id="s3" class="num">0</div></div>
+    <div class="glass card"><div class="small">🚫 BANNED</div><div id="s4" class="num">0</div></div>
+  </div>
+  <div class="glass card">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+      <h3>📋 Recent Keys</h3>
+      <div class="small">Last 8 entries</div>
+    </div>
+    <div id="recentList"></div>
+  </div>
+</div>
+
+<!-- Create Key -->
+<div id="create" class="page">
+  <div class="glass card">
+    <h3 style="margin-bottom: 20px;">🔑 Generate New 1Key</h3>
+    <div class="row">
+      <input id="key" placeholder="Auto-generated key">
+      <button class="btn2" onclick="randomKey()">🎲 Random</button>
+    </div>
+    <div class="row-3">
+      <select id="type"><option>USER</option><option>SELLER</option><option>ADMIN</option></select>
+      <select id="device"><option>1 DEVICE</option><option>2 DEVICE</option><option>unlimited</option></select>
+      <input id="coin" placeholder="💰 Coin" value="0">
+    </div>
+    <input id="date" type="datetime-local">
+    <div class="row">
+      <select id="status"><option value="active">🟢 Active</option><option value="ban">🔴 Ban</option></select>
+      <input id="url" placeholder="🔗 URL">
+    </div>
+    <textarea id="msg" placeholder="💬 Custom Message"></textarea>
+    <button class="btn" onclick="saveUser()">💾 Save Key</button>
+  </div>
+</div>
+
+<!-- Users List -->
+<div id="users" class="page">
+  <div class="glass card">
+    <div class="filter-bar">
+      <input id="search" placeholder="🔍 Search by key, type..." oninput="filterAndRender()">
+      <select id="filterStatus" onchange="filterAndRender()">
+        <option value="all">📋 All Status</option>
+        <option value="active">🟢 Active</option>
+        <option value="ban">🔴 Banned</option>
+        <option value="expired">⏰ Expired</option>
+      </select>
+      <select id="filterDevice" onchange="filterAndRender()">
+        <option value="all">📱 All Devices</option>
+        <option value="1 DEVICE">1 DEVICE</option>
+        <option value="2 DEVICE">2 DEVICE</option>
+        <option value="unlimited">Unlimited</option>
+      </select>
+      <button class="btn2" onclick="resetFilters()">🔄 Reset</button>
+    </div>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>Key</th><th>Type</th><th>Status</th><th>Device</th><th>Coin</th><th>UID Status</th><th>Expiry</th><th>Actions</th></tr></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Settings Page -->
+<div id="settings" class="page">
+  <div class="glass card">
+    <h3 style="margin-bottom: 20px;">🎨 Appearance Settings</h3>
+    
+    <div class="setting-item">
+      <span class="setting-label">🎨 Accent Color</span>
+      <div class="color-options" id="colorOptions">
+        <div class="color-option" style="background: #00ffcc;" data-color="#00ffcc"></div>
+        <div class="color-option" style="background: #a855f7;" data-color="#a855f7"></div>
+        <div class="color-option" style="background: #ec4899;" data-color="#ec4899"></div>
+        <div class="color-option" style="background: #f59e0b;" data-color="#f59e0b"></div>
+        <div class="color-option" style="background: #3b82f6;" data-color="#3b82f6"></div>
+      </div>
+    </div>
+    
+    <div class="setting-item">
+      <span class="setting-label">🌈 Glass Intensity</span>
+      <input type="range" id="glassIntensity" min="0.4" max="0.9" step="0.05" value="0.65">
+      <span id="intensityValue" class="small">65%</span>
+    </div>
+    
+    <div class="setting-item">
+      <span class="setting-label">✨ Blur Amount</span>
+      <input type="range" id="blurAmount" min="8" max="30" step="2" value="20">
+      <span id="blurValue" class="small">20px</span>
+    </div>
+    
+    <div class="setting-item">
+      <span class="setting-label">📐 Card Radius</span>
+      <input type="range" id="radiusAmount" min="16" max="40" step="2" value="28">
+      <span id="radiusValue" class="small">28px</span>
+    </div>
+    
+    <button class="btn" onclick="resetToDefault()" style="margin-top: 20px;">🔄 Reset to Default</button>
+  </div>
+  
+  <div class="glass card" style="margin-top: 20px;">
+    <h3 style="margin-bottom: 20px;">⚙️ System Actions</h3>
+    <div class="row">
+      <button class="btn-danger" onclick="exportData()">📤 Export All Data (JSON)</button>
+      <button class="btn-warning" onclick="clearAllData()" style="background:rgba(255,165,2,0.2); color:#ffa502; border:1px solid #ffa502;">⚠️ Clear All Data</button>
+    </div>
+  </div>
+</div>
+
+<!-- System Page -->
+<div id="system" class="page">
+  <div class="glass card">
+    <h3 style="margin-bottom: 20px;">⚙️ System Configuration</h3>
+    <div class="row">
+      <select id="enabled"><option value="false">❌ Maintenance Disabled</option><option value="true">⚠️ Maintenance Enabled</option></select>
+      <select id="stype"><option>Update</option><option>Maintenance</option><option>Notice</option></select>
+    </div>
+    <input id="title" placeholder="🏷️ System Title">
+    <textarea id="sysmsg" placeholder="📢 System Message / Broadcast"></textarea>
+    <input id="sysurl" placeholder="🔗 Update URL">
+    <button class="btn" onclick="saveSystem()">💾 Save Settings</button>
+  </div>
+</div>
+
+</div>
+
+<!-- Bottom Navigation -->
+<div class="nav">
+  <button class="active" onclick="goPage('dash',this)">📊 Home</button>
+  <button onclick="goPage('create',this)">🔑 Create</button>
+  <button onclick="goPage('users',this)">👥 Users</button>
+  <button onclick="goPage('settings',this)">🎨 Theme</button>
+  <button onclick="goPage('system',this)">⚙️ System</button>
+</div>
+
+<!-- Edit Modal -->
+<div id="editModal" class="modal">
+  <div class="modal-content glass card">
+    <h3 style="margin-bottom: 20px;">✏️ Edit Key</h3>
+    <input id="editKeyId" readonly placeholder="Key ID">
+    <select id="editDevice"><option>1 DEVICE</option><option>2 DEVICE</option><option>unlimited</option></select>
+    <select id="editType"><option>USER</option><option>SELLER</option><option>ADMIN</option></select>
+    <select id="editStatus"><option>active</option><option>ban</option></select>
+    <input id="editCoin" placeholder="Coin Amount">
+    <input id="editExpiry" type="datetime-local">
+    <input id="editUrl" placeholder="URL">
+    <textarea id="editMsg" placeholder="Message"></textarea>
+    <input id="editUid" readonly placeholder="UID">
+    <input id="editUid1" readonly placeholder="UID1">
+    <div class="row" style="margin-top: 10px;">
+      <button class="btn" onclick="updateKey()">💾 Update</button>
+      <button class="btn-success" onclick="resetUid()">🔄 Reset UID</button>
+      <button class="btn2" onclick="closeModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+import { getDatabase, ref, set, update, remove, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCR9wOKWhJaXGvwrqQ6mKkB_9cHd63Q0TQ",
+  authDomain: "nxdshoaib.firebaseapp.com",
+  databaseURL: "https://nxdshoaib-default-rtdb.firebaseio.com",
+  projectId: "nxdshoaib",
+  storageBucket: "nxdshoaib.firebasestorage.app",
+  messagingSenderId: "617859705391",
+  appId: "1:617859705391:web:81c75c8ec706373f9eb4da",
+  measurementId: "G-YE9JQQNZHV"
+};
+
+const app = initializeApp(firebaseConfig);
+getAnalytics(app);
+const db = getDatabase(app);
+
+const auth = getAuth(app);
+
+const root = "ANDROID_SKETCHWARE_MASTER_USERS";
+
+let allUsers = [];
+let editingKey = null;
+
+function showToast(msg, isError = false) {
+  const toast = document.getElementById("toast");
+  toast.textContent = msg;
+  toast.style.color = isError ? "#ff5570" : "#00ffcc";
+  toast.style.borderColor = isError ? "#ff5570" : "#00ffcc";
+  toast.style.display = "block";
+  setTimeout(() => toast.style.display = "none", 3000);
+}
+
+window.toggleTheme = () => document.body.classList.toggle("light");
+
+window.goPage = (id, el) => {
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  document.querySelectorAll(".nav button").forEach(b => b.classList.remove("active"));
+  el.classList.add("active");
+};
+
+function setDefaultDateTime() {
+  let d = new Date();
+  d.setDate(d.getDate() + 30);
+  d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
+  document.getElementById("date").value = d.toISOString().slice(0, 16);
+}
+setDefaultDateTime();
+
+window.randomKey = () => {
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let key = "";
+  for (let i = 0; i < 10; i++) key += chars.charAt(Math.floor(Math.random() * chars.length));
+  document.getElementById("key").value = key;
+};
+randomKey();
+
+function formatCountdown(timestamp) {
+  const remaining = Number(timestamp) - Date.now();
+  if (remaining <= 0) return "Expired";
+  const days = Math.floor(remaining / 86400000);
+  const hours = Math.floor((remaining % 86400000) / 3600000);
+  if (days > 0) return `${days}d ${hours}h`;
+  if (hours > 0) return `${hours}h`;
+  return `<1h`;
+}
+
+window.saveUser = async () => {
+  const key = document.getElementById("key").value.trim();
+  if (!key) return showToast("❌ Key required!", true);
+  
+  const expiryTime = new Date(document.getElementById("date").value).getTime();
+  if (isNaN(expiryTime)) return showToast("❌ Invalid expiry date!", true);
+
+  const data = {
+    Uidkey: key,
+    key: key,
+    "login type": document.getElementById("type").value,
+    device: document.getElementById("device").value,
+    time: expiryTime.toString(),
+    created: Date.now().toString(),
+    uid: "null",
+    uid1: "null",
+    Status: document.getElementById("status").value,
+    coin: document.getElementById("coin").value || "0",
+    Massage: document.getElementById("msg").value || "Welcome!",
+    Url: document.getElementById("url").value || ""
+  };
+
+  try {
+    await set(ref(db, `${root}/${key}`), data);
+    showToast("✅ Key saved!");
+    randomKey();
+    setDefaultDateTime();
+    document.getElementById("msg").value = "";
+    document.getElementById("url").value = "";
+  } catch (e) {
+    showToast("❌ " + e.message, true);
+  }
+};
+
+window.saveSystem = async () => {
+  const data = {
+    enabled: document.getElementById("enabled").value === "true",
+    title: document.getElementById("title").value || "System Notice",
+    message: document.getElementById("sysmsg").value || "",
+    url: document.getElementById("sysurl").value || "",
+    type: document.getElementById("stype").value,
+    time: Date.now()
+  };
+  try {
+    await set(ref(db, `${root}/main/system`), data);
+    showToast("✅ Settings saved!");
+  } catch (e) {
+    showToast("❌ " + e.message, true);
+  }
+};
+
+function loadSystemSettings() {
+  onValue(ref(db, `${root}/main/system`), (snap) => {
+    const d = snap.val() || {};
+    document.getElementById("enabled").value = d.enabled ? "true" : "false";
+    document.getElementById("title").value = d.title || "";
+    document.getElementById("sysmsg").value = d.message || "";
+    document.getElementById("sysurl").value = d.url || "";
+    document.getElementById("stype").value = d.type || "Update";
+  });
+}
+
+window.openEditModal = (keyId) => {
+  const user = allUsers.find(u => (u.key || u.Uidkey) === keyId);
+  if (!user) return;
+  editingKey = keyId;
+  document.getElementById("editKeyId").value = user.key || user.Uidkey;
+  document.getElementById("editDevice").value = user.device || "1 DEVICE";
+  document.getElementById("editType").value = user["login type"] || "USER";
+  document.getElementById("editStatus").value = user.Status || "active";
+  document.getElementById("editCoin").value = user.coin || "0";
+  document.getElementById("editUrl").value = user.Url || "";
+  document.getElementById("editMsg").value = user.Massage || "";
+  document.getElementById("editUid").value = user.uid || "null";
+  document.getElementById("editUid1").value = user.uid1 || "null";
+  if (user.time) {
+    const date = new Date(parseInt(user.time));
+    document.getElementById("editExpiry").value = date.toISOString().slice(0, 16);
+  }
+  document.getElementById("editModal").classList.add("active");
+};
+
+window.resetUid = async () => {
+  if (!editingKey) return;
+  try {
+    await update(ref(db, `${root}/${editingKey}`), { uid: "null", uid1: "null" });
+    showToast("✅ UID reset successfully!");
+    document.getElementById("editUid").value = "null";
+    document.getElementById("editUid1").value = "null";
+  } catch (e) {
+    showToast("❌ " + e.message, true);
+  }
+};
+
+window.closeModal = () => document.getElementById("editModal").classList.remove("active");
+
+window.updateKey = async () => {
+  const expiry = new Date(document.getElementById("editExpiry").value).getTime();
+  const updated = {
+    device: document.getElementById("editDevice").value,
+    "login type": document.getElementById("editType").value,
+    Status: document.getElementById("editStatus").value,
+    coin: document.getElementById("editCoin").value,
+    Url: document.getElementById("editUrl").value,
+    Massage: document.getElementById("editMsg").value,
+    time: expiry.toString()
+  };
+  try {
+    await update(ref(db, `${root}/${editingKey}`), updated);
+    showToast("✅ Updated!");
+    closeModal();
+  } catch (e) {
+    showToast("❌ " + e.message, true);
+  }
+};
+
+window.deleteKey = async (keyId) => {
+  if (confirm("⚠️ Delete permanently?")) {
+    try {
+      await remove(ref(db, `${root}/${keyId}`));
+      showToast("🗑️ Deleted!");
+    } catch (e) {
+      showToast("❌ " + e.message, true);
+    }
+  }
+};
+
+window.resetFilters = () => {
+  document.getElementById("search").value = "";
+  document.getElementById("filterStatus").value = "all";
+  document.getElementById("filterDevice").value = "all";
+  filterAndRender();
+};
+
+window.filterAndRender = () => {
+  const query = document.getElementById("search").value.toLowerCase();
+  const statusFilter = document.getElementById("filterStatus").value;
+  const deviceFilter = document.getElementById("filterDevice").value;
+  const now = Date.now();
+  
+  let filtered = allUsers.filter(u => {
+    const matchesSearch = (u.key || u.Uidkey).toLowerCase().includes(query) ||
+                          (u["login type"] || "").toLowerCase().includes(query);
+    let matchesStatus = true;
+    if (statusFilter === "active") matchesStatus = u.Status === "active" && parseInt(u.time) > now;
+    else if (statusFilter === "ban") matchesStatus = u.Status === "ban";
+    else if (statusFilter === "expired") matchesStatus = u.Status === "active" && parseInt(u.time) <= now;
+    const matchesDevice = deviceFilter === "all" || u.device === deviceFilter;
+    return matchesSearch && matchesStatus && matchesDevice;
+  });
+  
+  renderTable(filtered);
+};
+
+function renderTable(users) {
+  const tbody = document.getElementById("tbody");
+  if (users.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding:50px;">📭 No keys found</td></tr>';
+    return;
+  }
+  
+  tbody.innerHTML = users.map(u => {
+    const isExpired = parseInt(u.time) <= Date.now();
+    let statusBadge = "";
+    if (u.Status === "ban") statusBadge = "<span class='badge red'>🔴 Banned</span>";
+    else if (isExpired) statusBadge = "<span class='badge yellow'>⏰ Expired</span>";
+    else statusBadge = "<span class='badge green'>🟢 Active</span>";
+    
+    const hasUid = u.uid && u.uid !== "null";
+    const uidStatus = hasUid ? "<span class='badge blue'>📱 Active</span>" : "<span class='badge purple'>💤 Idle</span>";
+    
+    return `
+      <tr>
+        <td><strong>${u.key || u.Uidkey}</strong></td>
+        <td>${u["login type"] || "USER"}</td>
+        <td>${statusBadge}</td>
+        <td>${u.device || "1 DEVICE"}</td>
+        <td>💰 ${u.coin || "0"}</td>
+        <td>${uidStatus}</td>
+        <td>${formatCountdown(u.time)}</td>
+        <td class="action-group">
+          <button class="icon-btn" onclick="openEditModal('${u.key || u.Uidkey}')">✏️</button>
+          <button class="icon-btn" onclick="deleteKey('${u.key || u.Uidkey}')">🗑️</button>
+        </td>
+      </tr>
+    `;
+  }).join("");
+}
+
+function updateRecentList(users) {
+  const recent = document.getElementById("recentList");
+  const last8 = users.slice(0, 8);
+  if (last8.length === 0) {
+    recent.innerHTML = '<div class="empty-state"><div class="empty-icon">🔑</div><div>No keys yet</div></div>';
+    return;
+  }
+  recent.innerHTML = `
+    <div class="table-wrapper"><table>
+      <thead><tr><th>Key</th><th>Type</th><th>Status</th><th>Device</th><th>Expiry</th></tr></thead>
+      <tbody>
+        ${last8.map(u => `
+          <tr>
+            <td><strong>${u.key || u.Uidkey}</strong></td>
+            <td>${u["login type"] || "USER"}</td>
+            <td>${u.Status === "ban" ? "<span class='badge red'>Banned</span>" : (parseInt(u.time) <= Date.now() ? "<span class='badge yellow'>Expired</span>" : "<span class='badge green'>Active</span>")}</td>
+            <td>${u.device || "1 DEVICE"}</td>
+            <td>${formatCountdown(u.time)}</td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table></div>
+  `;
+}
+
+window.exportData = () => {
+  const dataStr = JSON.stringify(allUsers, null, 2);
+  const blob = new Blob([dataStr], {type: "application/json"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `keys_backup_${new Date().toISOString().slice(0,19)}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast("📤 Export started!");
+};
+
+window.clearAllData = async () => {
+  if (confirm("⚠️⚠️⚠️ THIS WILL DELETE ALL KEYS! ⚠️⚠️⚠️\nAre you absolutely sure?")) {
+    const confirm2 = prompt("Type 'DELETE ALL' to confirm:");
+    if (confirm2 === "DELETE ALL") {
+      try {
+        const keys = allUsers.map(u => u.key || u.Uidkey);
+        
+        await set(ref(db, root), null);
+        
+        showToast("🗑️ All keys deleted!");
+      } catch (e) {
+        showToast("❌ " + e.message, true);
+      }
+    }
+  }
+};
+
+// Settings Functions
+function applySettings() {
+  const accent = localStorage.getItem("accentColor") || "#00ffcc";
+  const intensity = localStorage.getItem("glassIntensity") || "0.65";
+  const blur = localStorage.getItem("blurAmount") || "20";
+  const radius = localStorage.getItem("radiusAmount") || "28";
+  
+  document.documentElement.style.setProperty('--accent', accent);
+  document.documentElement.style.setProperty('--accent-dark', accent);
+  document.documentElement.style.setProperty('--glass', `rgba(25, 35, 60, ${intensity})`);
+  document.documentElement.style.setProperty('--glass-hover', `rgba(25, 45, 75, ${Math.min(0.9, parseFloat(intensity) + 0.1)})`);
+  document.documentElement.style.setProperty('--card-radius', `${radius}px`);
+  document.documentElement.style.setProperty('--glass-blur', `blur(${blur}px)`);
+  
+  document.getElementById("glassIntensity").value = intensity;
+  document.getElementById("blurAmount").value = blur;
+  document.getElementById("radiusAmount").value = radius;
+  document.getElementById("intensityValue").innerText = Math.round(parseFloat(intensity) * 100) + "%";
+  document.getElementById("blurValue").innerText = blur + "px";
+  document.getElementById("radiusValue").innerText = radius + "px";
+  
+  // Highlight selected color
+  document.querySelectorAll('.color-option').forEach(opt => {
+    if (opt.dataset.color === accent) opt.classList.add('selected');
+    else opt.classList.remove('selected');
+  });
+}
+
+window.setAccentColor = (color) => {
+  localStorage.setItem("accentColor", color);
+  applySettings();
+};
+
+window.resetToDefault = () => {
+  localStorage.removeItem("accentColor");
+  localStorage.removeItem("glassIntensity");
+  localStorage.removeItem("blurAmount");
+  localStorage.removeItem("radiusAmount");
+  applySettings();
+  showToast("🔄 Reset to default!");
+};
+
+// Color options click
+document.querySelectorAll('.color-option').forEach(opt => {
+  opt.addEventListener('click', () => window.setAccentColor(opt.dataset.color));
+});
+
+document.getElementById("glassIntensity").addEventListener("input", (e) => {
+  const val = e.target.value;
+  localStorage.setItem("glassIntensity", val);
+  document.getElementById("intensityValue").innerText = Math.round(parseFloat(val) * 100) + "%";
+  applySettings();
+});
+
+document.getElementById("blurAmount").addEventListener("input", (e) => {
+  const val = e.target.value;
+  localStorage.setItem("blurAmount", val);
+  document.getElementById("blurValue").innerText = val + "px";
+  applySettings();
+});
+
+document.getElementById("radiusAmount").addEventListener("input", (e) => {
+  const val = e.target.value;
+  localStorage.setItem("radiusAmount", val);
+  document.getElementById("radiusValue").innerText = val + "px";
+  applySettings();
+});
+
+// Firebase Listener
+
+loadSystemSettings();
+applySettings();
+
+// LOGIN FUNCTION
+window.login = async () => {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    
+    if (email !== "sr3656249@gmail.com" && email !== "sr3798962@gmail.com") {
+  showToast("❌ Only admin allowed", true);
+  return;
+}
+    
+    showToast("✅ Login successful");
+  } catch (error) {
+    showToast("❌ " + error.message, true);
+  }
+};
+
+// LOGOUT FUNCTION
+window.logout = async () => {
+  await signOut(auth);
+  showToast("👋 Logged out");
+};
+
+// CHECK LOGIN STATE
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+
+    // ✅ login ho gaya
+    document.getElementById("loginPage").style.display = "none";
+
+    // ✅ DATABASE YAHAN LOAD HOGA
+    onValue(ref(db, root), (snapshot) => {
+      const data = snapshot.val() || {};
+      allUsers = [];
+      let total = 0, active = 0, expired = 0, banned = 0;
+      const now = Date.now();
+
+      Object.keys(data).forEach(key => {
+        if (key === "main") return;
+        const user = data[key];
+        allUsers.push({ ...user, id: key });
+        total++;
+        if (user.Status === "ban") banned++;
+        else if (parseInt(user.time) <= now) expired++;
+        else active++;
+      });
+
+      allUsers.sort((a, b) => (parseInt(b.created) || 0) - (parseInt(a.created) || 0));
+
+      document.getElementById("s1").innerText = total;
+      document.getElementById("s2").innerText = active;
+      document.getElementById("s3").innerText = expired;
+      document.getElementById("s4").innerText = banned;
+
+      filterAndRender();
+      updateRecentList(allUsers);
+    });
+
+  } else {
+    // ❌ login nahi hai
+    document.getElementById("loginPage").style.display = "flex";
+  }
+});
+
+</script>
+</body>
+</html>
